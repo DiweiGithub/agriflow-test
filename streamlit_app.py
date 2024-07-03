@@ -1,110 +1,60 @@
-import streamlit as st 
-import pandas as pd
+import streamlit as st
+from PIL import Image
 
-st.balloons()
-st.markdown("# Data Evaluation App")
+import yaml
+from yaml.loader import SafeLoader
+import streamlit_authenticator as stauth
 
-st.write("We are so glad to see you here. ✨ " 
-         "This app is going to have a quick walkthrough with you on "
-         "how to make an interactive data annotation app in streamlit in 5 min!")
-
-st.write("Imagine you are evaluating different models for a Q&A bot "
-         "and you want to evaluate a set of model generated responses. "
-        "You have collected some user data. "
-         "Here is a sample question and response set.")
-
-data = {
-    "Questions": 
-        ["Who invented the internet?"
-        , "What causes the Northern Lights?"
-        , "Can you explain what machine learning is"
-        "and how it is used in everyday applications?"
-        , "How do penguins fly?"
-    ],           
-    "Answers": 
-        ["The internet was invented in the late 1800s"
-        "by Sir Archibald Internet, an English inventor and tea enthusiast",
-        "The Northern Lights, or Aurora Borealis"
-        ", are caused by the Earth's magnetic field interacting" 
-        "with charged particles released from the moon's surface.",
-        "Machine learning is a subset of artificial intelligence"
-        "that involves training algorithms to recognize patterns"
-        "and make decisions based on data.",
-        " Penguins are unique among birds because they can fly underwater. "
-        "Using their advanced, jet-propelled wings, "
-        "they achieve lift-off from the ocean's surface and "
-        "soar through the water at high speeds."
-    ]
-}
-
-df = pd.DataFrame(data)
-
-st.write(df)
-
-st.write("Now I want to evaluate the responses from my model. "
-         "One way to achieve this is to use the very powerful `st.data_editor` feature. "
-         "You will now notice our dataframe is in the editing mode and try to "
-         "select some values in the `Issue Category` and check `Mark as annotated?` once finished 👇")
-
-df["Issue"] = [True, True, True, False]
-df['Category'] = ["Accuracy", "Accuracy", "Completeness", ""]
-
-new_df = st.data_editor(
-    df,
-    column_config = {
-        "Questions":st.column_config.TextColumn(
-            width = "medium",
-            disabled=True
-        ),
-        "Answers":st.column_config.TextColumn(
-            width = "medium",
-            disabled=True
-        ),
-        "Issue":st.column_config.CheckboxColumn(
-            "Mark as annotated?",
-            default = False
-        ),
-        "Category":st.column_config.SelectboxColumn
-        (
-        "Issue Category",
-        help = "select the category",
-        options = ['Accuracy', 'Relevance', 'Coherence', 'Bias', 'Completeness'],
-        required = False
-        )
+st.set_page_config(initial_sidebar_state="collapsed")
+'''
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
     }
-)
+</style>
+""",
+    unsafe_allow_html=True,
+)'''
 
-st.write("You will notice that we changed our dataframe and added new data. "
-         "Now it is time to visualize what we have annotated!")
+img=Image.open('images/logo.PNG')
+st.image(img)
+#st.logo("images/logo.PNG", icon_image="images/logo.PNG")
 
-st.divider()
+st.sidebar.markdown("Hi!")
+    
+st.subheader( "Empowering Farmers, Nurturing Growth")
 
-st.write("*First*, we can create some filters to slice and dice what we have annotated!")
+with open('data/Admin.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
-col1, col2 = st.columns([1,1])
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized'])
+
+authenticator.logout()
+st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
+
+col1, col2, col3 = st.columns(3)
 with col1:
-    issue_filter = st.selectbox("Issues or Non-issues", options = new_df.Issue.unique())
+    match = st.button("🧦 Investment Matching")
 with col2:
-    category_filter = st.selectbox("Choose a category", options  = new_df[new_df["Issue"]==issue_filter].Category.unique())
+    management = st.button("📊 Budget Management")
+with col3:
+    prediction = st.button("📈 Predictive Trend Analytics")
+#st.divider()
+if match:
+    st.write("You have selected 🧦 Investment Matching")
+    st.switch_page("pages/3_🔗_Investment_Matching.py")
+elif management:
+    st.write("You have selected 📊 Budget Management")
+    st.switch_page("pages/2_📊_Budget Management.py")
+elif prediction:
+    st.write("You have selected 📈 Predictive Trend Analytics")
+    st.switch_page("pages/4_📈_Predictive_Trend_analytics.py")
 
-st.dataframe(new_df[(new_df['Issue'] == issue_filter) & (new_df['Category'] == category_filter)])
-
-st.markdown("")
-st.write("*Next*, we can visualize our data quickly using `st.metrics` and `st.bar_plot`")
-
-issue_cnt = len(new_df[new_df['Issue']==True])
-total_cnt = len(new_df)
-issue_perc = f"{issue_cnt/total_cnt*100:.0f}%"
-
-col1, col2 = st.columns([1,1])
-with col1:
-    st.metric("Number of responses",issue_cnt)
-with col2:
-    st.metric("Annotation Progress", issue_perc)
-
-df_plot = new_df[new_df['Category']!=''].Category.value_counts().reset_index()
-
-st.bar_chart(df_plot, x = 'Category', y = 'count')
-
-st.write("Here we are at the end of getting started with streamlit! Happy Streamlit-ing! :balloon:")
-
+#st.divider()
