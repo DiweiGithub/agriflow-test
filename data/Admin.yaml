@@ -1,0 +1,26 @@
+cookie:
+  expiry_days: 30
+  key: random_signature_key
+  name: random_cookie_name
+credentials:
+  usernames:
+    diweil:
+      email: diwei.depienne@gmail.com
+      failed_login_attempts: 3
+      logged_in: false
+      name: Diwei Liu
+      password: $2b$12$LtFzZeFKPIDyMM8dbCAcau8dQphsw4teR6UAW/145nAQwQULmSc1S
+    francoisd:
+      email: fdepinene@gmail.com
+      logged_in: false
+      name: Francois Depienne
+      password: $2b$12$0b5oYuQA6u2Nv3jsK0IULe2Wg.jHgWX1h2rV6cnBfa/SLu.Ncowi2
+    meganm:
+      email: molitmeg@gmail.com
+      failed_login_attempts: 3
+      logged_in: false
+      name: Megan Molitor
+      password: $2b$12$QGyvN4A0dDFAWIQf4zkSou44sAlPFBWpcXs4IWkTlVo2cMLrG0M4.
+pre-authorized:
+  emails:
+  - melsby@gmail.com
