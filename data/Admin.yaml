@@ -10,8 +10,14 @@ credentials:
       logged_in: false
       name: Diwei Liu
       password: $2b$12$7f0nfuO.My1g1V7asGHcTupl8s/Qskl4laAslJR/zvFI0MVNZdEqi
+    ed:
+      email: edepienne@gmail.com
+      logged_in: false
+      name: EmilyD
+      password: $2b$12$y.AxDJZVQxpLnAuJ0/T0mOqGQEb.4RsiP1jMXBEruhMiQC1MYSg7e
     frand:
       email: fdepienne@gmail.com
+      failed_login_attempts: 0
       logged_in: false
       name: Francois Depienne
       password: $2b$12$MObXXRHZ.pluUounhQPR.e9ImqX2Fkpglv82eiRQ4tziaOVdBvU92

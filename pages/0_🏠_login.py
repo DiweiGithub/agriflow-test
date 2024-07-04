@@ -60,7 +60,7 @@ elif st.session_state["authentication_status"] is False:
 elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
 
-if signups=st.button("Sign up"):
+if st.button("Sign up"):
     #if st.session_state["name"] == None:
     st.warning('Please sign up')
     
@@ -99,6 +99,15 @@ try:
                 st.error('Email not found')
         except Exception as e:
             st.error(e)
+except Exception as e:
+    st.error(e)
+    
+try:
+    email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
+    if email_of_registered_user:
+        with open('data/Admin.yaml', 'w') as file:
+            yaml.dump(config, file, default_flow_style=False)
+        st.success('User registered successfully')
 except Exception as e:
     st.error(e)
 
