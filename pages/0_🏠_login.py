@@ -33,12 +33,12 @@ st.markdown("Your care will shape **the future of agriculture** in Europe!")
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 st.markdown ( ''' :green[AgriFlow] is **really** ***cool*** !!! :sunglasses:''' )
 
-names=["Diwei","Megan"]
-username = ["DiweiL","MeganM"]
-passwords =["123abc","456efg"]
+names=["Diwei","Megan","Francois"]
+username = ["DiweiL","MeganM","FrancoisD"]
+passwords =["123abc","456efg","jing456"]
 
-#hashed_passwords=Hasher(passwords).generate() #bcrypt
-#print(hashed_passwords)
+hashed_passwords=Hasher(passwords).generate() #bcrypt
+print(hashed_passwords)
 
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -75,7 +75,7 @@ try:
     email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
     if email_of_registered_user:
         with open('data/Admin.yaml', 'w') as file:
-            yaml.dump(Admin, file, default_flow_style=False)
+            yaml.dump(config, file, default_flow_style=False)
         st.success('User registered successfully')
 except Exception as e:
     st.error(e)
