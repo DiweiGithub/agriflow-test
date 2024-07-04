@@ -55,7 +55,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized'])
 
-logout= authenticator.logout()
+authenticator.logout()
 #st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 
 col1, col2, col3 = st.columns(3)
@@ -76,19 +76,17 @@ elif prediction:
     st.write("You have selected 📈 Predictive Trend Analytics")
     st.switch_page("pages/4_📈_Predictive_Trend_analytics.py")
 
-name, authentication_status, username = authenticator.login('main', fields = {'Form name': 'login'})
-print(name, authentication_status, username)
-if authentication_status:
-    authenticator.logout('Logout', 'main')
-    st.write(f'Welcome *{name}*')        
+authenticator.login('main', fields = {'Form name': 'login'})
+if st.session_state["authentication_status"]:
+    st.write(f'Welcome *{st.session_state["name"]}*')        
     st.switch_page("pages/1_🏠_Homepage.py")    
 
-elif authentication_status == False:
+elif st.session_state["authentication_status"] == False:
     st.error('Username/password is incorrect')
-elif name == None:
+elif st.session_state["authentication_status"] == None:
     st.warning('Please sign up')
     st.button("Sign up")
-elif authentication_status == None:
+elif st.session_state["name"] == None:
     st.warning('Please enter your username and password')
 
 #st.divider()
