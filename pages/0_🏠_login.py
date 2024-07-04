@@ -62,7 +62,7 @@ elif st.session_state["authentication_status"] is None:
 elif st.session_state["name"] == None:
     st.warning('Please sign up')
     st.button("Sign up")
-authenticator.logout('Logout')
+authenticator.logout()
 
 if st.session_state["authentication_status"]:
     try:
@@ -75,7 +75,7 @@ try:
     email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
     if email_of_registered_user:
         with open('data/Admin.yaml', 'w') as file:
-            yaml.dump(config, file, default_flow_style=False)
+            yaml.dump(Admin, file, default_flow_style=False)
         st.success('User registered successfully')
 except Exception as e:
     st.error(e)
