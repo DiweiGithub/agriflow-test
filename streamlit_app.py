@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 import streamlit as st
 from PIL import Image
 
 import yaml
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
-=======
+
 import streamlit as st 
 import pandas as pd
 from PIL import Image
@@ -13,7 +12,7 @@ import yaml
 
 import streamlit_authenticator as stauth
 from yaml.loader import SafeLoader
->>>>>>> e5cda18 (Update)
+
 
 st.set_page_config(initial_sidebar_state="collapsed")
 '''
@@ -26,17 +25,13 @@ st.markdown(
 </style>
 """,
     unsafe_allow_html=True,
-<<<<<<< HEAD
 )'''
-=======
-)
-'''
->>>>>>> e5cda18 (Update)
+
+
 
 img=Image.open('images/logo.PNG')
 st.image(img)
 #st.logo("images/logo.PNG", icon_image="images/logo.PNG")
-<<<<<<< HEAD
 
 st.sidebar.markdown("Hi!")
     
@@ -44,11 +39,6 @@ st.subheader( "Empowering Farmers, Nurturing Growth")
 
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
-
-=======
-st.sidebar.markdown("Hi!")
-    
-st.subheader( "Empowering Farmers, Nurturing Growth")
 
 st.markdown("Your care will shape **the future of agriculture** in Europe!")
 
@@ -58,14 +48,12 @@ st.markdown ( ''' :green[AgriFlow]is **really** ***cool*** !!! :sunglasses:''' )
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
->>>>>>> e5cda18 (Update)
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
     config['cookie']['key'],
     config['cookie']['expiry_days'],
-<<<<<<< HEAD
-    config['preauthorized'])
+    config['pre-authorized'])
 
 authenticator.logout()
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
@@ -87,9 +75,7 @@ elif management:
 elif prediction:
     st.write("You have selected 📈 Predictive Trend Analytics")
     st.switch_page("pages/4_📈_Predictive_Trend_analytics.py")
-=======
-    config['pre-authorized']
-)
+
 name, authentication_status, username = authenticator.login('main', fields = {'Form name': 'login'})
 print(name, authentication_status, username)
 if authentication_status:
@@ -104,7 +90,5 @@ elif name == None:
     st.button("Sign up")
 elif authentication_status == None:
     st.warning('Please enter your username and password')
-
->>>>>>> e5cda18 (Update)
 
 #st.divider()
