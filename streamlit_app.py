@@ -56,7 +56,7 @@ authenticator = stauth.Authenticate(
     config['pre-authorized'])
 
 authenticator.logout()
-st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
+#st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 
 col1, col2, col3 = st.columns(3)
 with col1:
