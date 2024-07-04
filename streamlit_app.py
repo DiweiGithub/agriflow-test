@@ -4,6 +4,7 @@ from PIL import Image
 import yaml
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
+
 import streamlit as st 
 import pandas as pd
 from PIL import Image
@@ -11,6 +12,7 @@ import yaml
 
 import streamlit_authenticator as stauth
 from yaml.loader import SafeLoader
+
 
 st.set_page_config(initial_sidebar_state="collapsed")
 '''
@@ -26,10 +28,10 @@ st.markdown(
 )'''
 
 
+
 img=Image.open('images/logo.PNG')
 st.image(img)
 #st.logo("images/logo.PNG", icon_image="images/logo.PNG")
-
 
 st.sidebar.markdown("Hi!")
     
@@ -37,7 +39,6 @@ st.subheader( "Empowering Farmers, Nurturing Growth")
 
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
-
 
 st.sidebar.markdown("Hi!")
     
@@ -50,7 +51,6 @@ st.markdown ( ''' :green[AgriFlow]is **really** ***cool*** !!! :sunglasses:''' )
 
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
-
 
 authenticator = stauth.Authenticate(
     config['credentials'],
@@ -94,7 +94,5 @@ elif name == None:
     st.button("Sign up")
 elif authentication_status == None:
     st.warning('Please enter your username and password')
-
->>>>>>> e5cda18 (Update)
 
 #st.divider()
