@@ -62,7 +62,7 @@ elif st.session_state["authentication_status"] is None:
 elif st.session_state["name"] == None:
     st.warning('Please sign up')
     st.button("Sign up")
-authenticator.logout()
+authenticator.logout('Logout')
 
 if st.session_state["authentication_status"]:
     try:
