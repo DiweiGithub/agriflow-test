@@ -55,9 +55,8 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized'])
 
-authenticator.logout()
 #st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
-
+'''
 col1, col2, col3 = st.columns(3)
 with col1:
     match = st.button("🧦 Investment Matching")
@@ -75,18 +74,27 @@ elif management:
 elif prediction:
     st.write("You have selected 📈 Predictive Trend Analytics")
     st.switch_page("pages/4_📈_Predictive_Trend_analytics.py")
-
+'''
 authenticator.login('main', fields = {'Form name': 'login'})
 if st.session_state["authentication_status"]:
     st.write(f'Welcome *{st.session_state["name"]}*')        
     st.switch_page("pages/1_🏠_Homepage.py")    
 
-elif st.session_state["authentication_status"] == False:
+elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
-elif st.session_state["authentication_status"] == None:
-    st.warning('Please sign up')
-    st.button("Sign up")
-elif st.session_state["name"] == None:
+    if st.session_state["name"] is None:
+        #st.warning('Please sign up')
+        if st.button("Sign up"):  
+            #Creating a new user registration widget
+            try:
+                email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
+                if email_of_registered_user:
+                    with open('data/Admin.yaml', 'w') as file:
+                        yaml.dump(config, file, default_flow_style=False)
+                    st.success('User registered successfully')
+            except Exception as e:
+                st.error(e)
+elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
 
 #st.divider()
