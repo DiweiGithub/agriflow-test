@@ -78,7 +78,7 @@ elif st.session_state["authentication_status"] is False:
                     yaml.dump(config, file, default_flow_style=False)
                 st.success('User registered successfully')
         except Exception as e:
-        st.error(e)
+            st.error(e)
 
 '''
 
