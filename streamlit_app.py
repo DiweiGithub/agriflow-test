@@ -40,10 +40,6 @@ st.subheader( "Empowering Farmers, Nurturing Growth")
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
-st.sidebar.markdown("Hi!")
-    
-st.subheader( "Empowering Farmers, Nurturing Growth")
-
 st.markdown("Your care will shape **the future of agriculture** in Europe!")
 
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
