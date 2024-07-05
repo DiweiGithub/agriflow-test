@@ -36,15 +36,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized'])
 authenticator.logout("Logout",'main')
-'''
-try:
-    
-except KeyError:        
-    pass  # ignore it
-except Exception as err:
-    st.error(f'Unexpected exception {err}')
-    raise Exception(err)  # but not this, let's crash the app
-'''
+
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 
 col1, col2, col3 = st.columns(3)

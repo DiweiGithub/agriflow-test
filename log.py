@@ -210,3 +210,45 @@ st.write("Here we are at the end of getting started with streamlit! Happy Stream
 
 
 '''
+'''
+
+    if st.session_state["name"] is None:
+        #st.warning('Please sign up')
+        if signup:  
+            #Creating a new user registration widget
+            try:
+                email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
+                if email_of_registered_user:
+                    with open('data/Admin.yaml', 'w') as file:
+                        yaml.dump(Admin, file, default_flow_style=False)
+                    st.success('User registered successfully')
+            except Exception as e:
+                st.error(e)
+    
+        elif reset:
+            try:
+                if authenticator.reset_password(st.session_state["username"]):
+                    submitted = st.form_submit_button("Submit")
+                    st.success('Password modified successfully')
+            except Exception as e:
+                st.error(e)
+        elif forget:
+            try:
+                username_of_forgotten_password, email_of_forgotten_password, new_random_password = authenticator.forgot_password()
+                if username_of_forgotten_password:
+                    st.success('New password to be sent securely')
+                    # The developer should securely transfer the new password to the user.
+                elif username_of_forgotten_password == False:
+                    st.error('Username not found')
+            except Exception as e:
+                st.error(e)
+'''
+'''
+try:
+    
+except KeyError:        
+    pass  # ignore it
+except Exception as err:
+    st.error(f'Unexpected exception {err}')
+    raise Exception(err)  # but not this, let's crash the app
+'''
