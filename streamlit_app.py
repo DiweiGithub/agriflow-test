@@ -1,17 +1,12 @@
 import streamlit as st
-from PIL import Image
 
 import yaml
 from yaml.loader import SafeLoader
-import streamlit_authenticator as stauth
 
-import streamlit as st 
 import pandas as pd
 from PIL import Image
-import yaml
 
 import streamlit_authenticator as stauth
-from yaml.loader import SafeLoader
 
 
 st.set_page_config(initial_sidebar_state="collapsed")
@@ -69,16 +64,8 @@ elif st.session_state["authentication_status"] is False:
     signup = st.button("Sign up")
     reset=st.button("Reset Password")
     forget=st.button("Forget Password")
-    if signup:  
-        #Creating a new user registration widget
-        try:
-            email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
-            if email_of_registered_user:
-                with open('data/Admin.yaml', 'w') as file:
-                    yaml.dump(config, file, default_flow_style=False)
-                st.success('User registered successfully')
-        except Exception as e:
-            st.error(e)
+    if signup:
+        st.switch_page("pages/reset.py")   
 
 '''
 
