@@ -6,7 +6,7 @@ from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
 
 st.set_page_config(initial_sidebar_state="collapsed")
-'''
+
 st.markdown(
     """
 <style>
@@ -16,7 +16,7 @@ st.markdown(
 </style>
 """,
     unsafe_allow_html=True,
-)'''
+)
 
 img=Image.open('images/logo.PNG')
 st.image(img)
