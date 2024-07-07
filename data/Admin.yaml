@@ -14,7 +14,7 @@ credentials:
       email: annech.depienne@gmai.com
       logged_in: false
       name: Anne
-      password: $2b$12$zf4uFoyi5bq3xqOAWDR/GuxChjNjnDtaUcUuNTgVSmdyz7HxWSs.q
+      password: $2b$12$zWt.6QBGM/Es5BuSo.VyjuCCVox5x.jBC62fRm/Qxt/2Urj8CpI1m
     chrisd:
       email: cdepienne@gmail.com
       failed_login_attempts: 0
