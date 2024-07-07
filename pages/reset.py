@@ -22,7 +22,7 @@ try:
         with open('data/Admin.yaml', 'w') as file:
             yaml.dump(config, file, default_flow_style=False)
         st.success('User registered successfully')
-        upload_photo = st.file_uploader("Upload a photo")
+        uploaded_photo = st.file_uploader("Upload a photo")
         camera_photo = st.camera_input("Take a photo")
         progress_bar = st.progress(0)
         for perc_completed in range(100):
