@@ -10,11 +10,11 @@ credentials:
       logged_in: false
       name: Adrian
       password: $2b$12$EBDoCDVuTGUfQOJgHyV62ubafECz52mCFucjid2JmY5b1yAppvuqi
-    annechd:
-      email: annech.depienne@gmai.com
+    annechdr:
+      email: annechr.depienne@gmai.com
       logged_in: false
       name: Anne
-      password: $2b$12$zWt.6QBGM/Es5BuSo.VyjuCCVox5x.jBC62fRm/Qxt/2Urj8CpI1m
+      password: $2b$12$aVu3jvLUL2dsh0fXO7fjpOthJu8kV/8dfUvpzxSNgqusXJrZ2P.DK
     chrisd:
       email: cdepienne@gmail.com
       failed_login_attempts: 0
