@@ -22,12 +22,16 @@ try:
         with open('data/Admin.yaml', 'w') as file:
             yaml.dump(config, file, default_flow_style=False)
         st.success('User registered successfully')
-        st.upload_photo = st.file_uploader("Upload a photo")
-        st.camera_photo = st.camera_input("Take a photo")
+        upload_photo = st.file_uploader("Upload a photo")
+        camera_photo = st.camera_input("Take a photo")
         progress_bar = st.progress(0)
         for perc_completed in range(100):
             time.sleep(0.05)
             progress_bar.progress(perc_completed+1)
+        if uploaded_photo is None:
+            st.image(camera_photo)
+        else:
+            st.image(uploaded_photo)
         #st.switch_page("streamlit_app.py")   
 except Exception as e:
     st.error(e)
