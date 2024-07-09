@@ -55,7 +55,7 @@ year_selection_list = list(np.arange(year_selection[0], year_selection[1]+1))
 
 df_total=pd.pivot_table(df[df.expenditure.isin(expen_selection) & df['year'].isin(year_selection_list)],index='year',values='euro',aggfunc=np.sum).reset_index()
 
-col1, col2 = st.columns([1,3]#,vertical_alignment = 'center'
+col1, col2 = st.columns([1,3],vertical_alignment = 'center'
                         )
 with col1:
   # display the dataframe and highlight the max
