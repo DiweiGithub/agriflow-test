@@ -19,7 +19,7 @@ st.markdown(
 )
 home_page_button= st.button("Home Page")
 if home_page_button:
-  st.switch_page("pages/1_🏠_Homepage.py")
+  st.switch_page("streamlit_app.py")
 st.divider()
 st.header("Welcome!")
 st.header("This page is available to all members.")
@@ -52,18 +52,30 @@ year_list = df.year.unique()
 year_selection = st.slider('Select year duration', 1986, 2006, (2000, 2016))
 year_selection_list = list(np.arange(year_selection[0], year_selection[1]+1))
 
+
+df_total=pd.pivot_table(df[df.expenditure.isin(expen_selection) & df['year'].isin(year_selection_list)],index='year',values='euro',aggfunc=np.sum).reset_index()
+
+col1, col2 = st.columns([1,3]#,vertical_alignment = 'center'
+                        )
+with col1:
+  # display the dataframe and highlight the max
+  st.dataframe(df_total.set_index('year').style.highlight_max(axis=0))
+with col2:
+  st.bar_chart(df_total, x = 'year', y = 'euro'#,horizontal = True
+               )
+
 df_selection = df[df.expenditure.isin(expen_selection) & df['year'].isin(year_selection_list)]
-reshaped_df = df_selection.pivot_table(index='expenditure', columns='year', values='euro', aggfunc='sum', fill_value=0)
-reshaped_df = reshaped_df.sort_values(by='expenditure', ascending=False)
+reshaped_df = df_selection.pivot_table(index='year', columns='expenditure', values='euro', aggfunc='sum', fill_value=0)
+reshaped_df = reshaped_df.sort_values(by='year', ascending=False)
 
 
 # display the dataframe and highlight the max
 st.dataframe(reshaped_df.style.highlight_max(axis=0))
 #display the dataframe with modification option
 df_editor = st.data_editor(reshaped_df, height=None, use_container_width=True,
-                            column_config={"expenditure": st.column_config.TextColumn("expenditure")},
+                            column_config={"year": st.column_config.TextColumn("year")},
                             num_rows="dynamic")
-df_chart = pd.melt(df_editor.reset_index(), id_vars='expenditure', var_name='year', value_name='euro')
+df_chart = pd.melt(df_editor.reset_index(), id_vars='year', var_name='expenditure', value_name='euro')
 
 # Display chart
 chart = alt.Chart(df_chart).mark_line().encode(
@@ -72,7 +84,4 @@ chart = alt.Chart(df_chart).mark_line().encode(
             color='expenditure:N'
             ).properties(height=320)
 st.altair_chart(chart, use_container_width=True)
-df_total=pd.pivot_table(df,index='year',values='euro',aggfunc=np.sum).reset_index()
-# display the dataframe and highlight the max
-st.dataframe(df_total.style.highlight_max(axis=0))
-st.bar_chart(df_total, x = 'year', y = 'euro')
+

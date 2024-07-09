@@ -35,7 +35,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['key'],
     config['cookie']['expiry_days'],
     config['pre-authorized'])
-authenticator.logout("Logout",'main')
+authenticator.logout()
 
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 

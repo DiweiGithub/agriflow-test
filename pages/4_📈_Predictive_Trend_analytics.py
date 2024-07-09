@@ -16,7 +16,7 @@ st.markdown(
 )
 home_page_button= st.button("Home Page")
 if home_page_button:
-  st.switch_page("pages/1_🏠_Homepage.py")
+  st.switch_page("streamlit_app.py")
 st.divider()
 st.header("Welcome!")
 st.header("This page is available to all members.")

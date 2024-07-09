@@ -20,7 +20,7 @@ st.markdown(
 )
 home_page_button= st.button("Home Page")
 if home_page_button:
-  st.switch_page("pages/1_🏠_Homepage.py")
+  st.switch_page("streamlit_app.py")
 st.divider()
 st.header("Welcome!")
 st.header("This page is available to all public.")
@@ -92,6 +92,14 @@ st.metric(label="Matches", value=df_match.shape[0])
 df_editor = st.data_editor(df_match,height=212, use_container_width=True,
                             column_config={"Interest": st.column_config.TextColumn("Interest")},
                             num_rows="dynamic")
-
-
+st.divider() 
+#st.dataframe(df_match['Investor'])
+for i in range(df_match.shape[0]):
+  investor=df_match['Investor'].to_list()[i]
+  amount_to_offer=df_match['amount_to_offer'].to_list()[i]
+  
+  amount_to_seek=df_match['amount_to_seek'].to_list()[i]
+  Interest=df_match['Interest'].to_list()[i]
+  i=i+1
+  st.metric(investor+'_'+Interest, amount_to_offer, amount_to_offer-amount_to_seek)
 

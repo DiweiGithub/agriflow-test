@@ -38,7 +38,7 @@ with open('data/Admin.yaml') as file:
 st.markdown("Your care will shape **the future of agriculture** in Europe!")
 
 st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
-st.markdown ( ''' :green[AgriFlow]is **really** ***cool*** !!! :sunglasses:''' )
+st.markdown ( ''' :green[AgriFlow] is **really** ***cool*** !!! :sunglasses:''' )
 
 with open('data/Admin.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -53,12 +53,31 @@ authenticator = stauth.Authenticate(
 #st.header( '''Welcome to :green[AgriFlow]!''', divider='rainbow')
 
 authenticator.login('main', fields = {'Form name': 'Login'})
-if st.session_state["authentication_status"] is None:
+if st.session_state["authentication_status"]:
+    authenticator.logout()
+    st.write(f'Welcome *{st.session_state["name"]}*')     
+    st.divider()     
+    #st.switch_page("pages/1_🏠_Homepage.py")   
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        match = st.button("🧦 Investment Matching")
+    with col2:
+        management = st.button("📊 Budget Management")
+    with col3:
+        prediction = st.button("📈 Predictive Trend Analytics")
+    #st.divider()
+    if match:
+        st.write("You have selected 🧦 Investment Matching")
+        st.switch_page("pages/3_🔗_Investment_Matching.py")
+    elif management:
+        st.write("You have selected 📊 Budget Management")
+        st.switch_page("pages/2_📊_Budget Management.py")
+    elif prediction:
+        st.write("You have selected 📈 Predictive Trend Analytics")
+        st.switch_page("pages/4_📈_Predictive_Trend_analytics.py")
+#st.divider()
+elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
-elif st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')        
-    st.switch_page("pages/1_🏠_Homepage.py")    
-
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
     signup = st.button("Sign up")
@@ -67,5 +86,3 @@ elif st.session_state["authentication_status"] is False:
     if signup:
         st.switch_page("pages/reset.py")   
 
-
-#st.divider()
